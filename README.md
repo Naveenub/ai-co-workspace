@@ -1,4 +1,4 @@
-# 🧠 AI Co-Workspace
+# 🧠 **AI Co-Workspace**
 
 **Claude-style AI co-workspace built for engineers.**
 Persistent memory, artifact intelligence, transparent RAG, and multi-model LLM orchestration — designed for real project workflows, not just chat.
