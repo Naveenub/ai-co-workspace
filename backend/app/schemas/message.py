@@ -10,4 +10,4 @@ class MessageOut(MessageCreate):
     created_at: str
 
     class Config:
-        orm_mode = True
+        orm_mode = True 
