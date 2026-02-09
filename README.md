@@ -362,5 +362,3 @@ This project isn’t about replacing Claude.
 It answers a different question:
 
 > **“What does an AI workspace look like when engineers control memory, context, and models?”**
-
----
