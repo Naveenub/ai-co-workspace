@@ -1,3 +1,3 @@
-def retrieve_context(workspace_id: int, query: str) -> str:
-    # TODO: Replace with vector search using Chroma/Qdrant
-    return f"Simulated context for workspace {workspace_id} and query '{query}'"
+def semantic_search(query: str, top_k: int = 5) -> list[str]:
+    # Placeholder for RAG vector search
+    return [f"Top {i+1} result for '{query}'" for i in range(top_k)]
