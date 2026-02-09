@@ -248,12 +248,45 @@ ai-co-workspace/
 │   │   └── test_rag.py                # 🆕 RAG tests
 │   └── requirements.txt
 ├── frontend/
-│   └── (unchanged – RAG is backend-transparent)
+│   ├── public/
+│   │   └── index.html
+|   ├── src/
+│   │   ├── App.tsx
+│   │   ├── index.tsx
+│   │   ├── components/
+│   │   │   ├── WorkspaceSidebar.tsx
+│   │   │   ├── ChatPanel.tsx
+│   │   │   ├── ArtifactEditor.tsx
+│   │   │   ├── MarkdownViewer.tsx
+│   │   │   └── MessageBubble.tsx
+│   │   └── styles/
+│   │   │   └── globals.css
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── tailwind.config.js
 ├── vectorstore/
 │   ├── chroma/
-│   └── qdrant/
+│   │   ├── __init__.py
+│   │   └── client.py        # pickle-based local store for testing
+│   ├── qdrant/
+│   │   ├── __init__.py
+│   │   └── client.py        # placeholder for live Qdrant integration
 ├── infra/
-│   └── (docker / k8s / terraform)
+│   ├── docker/
+│   │   ├── backend.Dockerfile
+│   │   ├── frontend.Dockerfile
+│   │   └── ollama.Dockerfile       # if using Ollama LLM
+│   ├── kubernetes/
+│   │   ├── backend.yaml
+│   │   ├── frontend.yaml
+│   │   └── qdrant.yaml
+│   └── terraform/
+│       ├── aws/
+│       │   └── main.tf             # AWS resources (ECS, S3, RDS)
+│       └── modules/
+│           ├── network.tf
+|           ├── db.tf
+|           └── storage.tf
 └── scripts/
     ├── seed_workspace.py
     ├── migrate_db.py
