@@ -5,7 +5,7 @@ Persistent memory, artifact intelligence, transparent RAG, and multi-model LLM o
 
 ---
 
-## ✨ Overview
+## ✨ **Overview**
 
 AI Co-Workspace is an **open-source, workspace-centric AI platform** where conversations evolve into artifacts, artifacts become memory, and memory actively informs future reasoning.
 
@@ -21,7 +21,7 @@ Think **Claude Workspaces**, but:
 
 ---
 
-## 🎯 Why This Project Exists
+## 🎯 **Why This Project Exists**
 
 Modern LLM tools are powerful, but they:
 
@@ -35,7 +35,7 @@ Modern LLM tools are powerful, but they:
 
 ---
 
-## 🚀 Core Capabilities
+## 🚀 **Core Capabilities**
 
 ### 🗂️ Workspace-First Design
 
@@ -51,7 +51,7 @@ No cross-project contamination. No global memory leaks.
 
 ---
 
-### 💬 Intelligent Chat System
+### 💬 **Intelligent Chat System**
 
 * Workspace-scoped chat sessions
 * Message history with summarization
