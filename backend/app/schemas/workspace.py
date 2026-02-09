@@ -1,13 +1,10 @@
 from pydantic import BaseModel
 
-class WorkspaceBase(BaseModel):
+class WorkspaceCreate(BaseModel):
     name: str
-    description: str | None = ""
+    description: str = ""
 
-class WorkspaceCreate(WorkspaceBase):
-    pass
-
-class Workspace(WorkspaceBase):
+class WorkspaceOut(WorkspaceCreate):
     id: int
 
     class Config:
