@@ -60,7 +60,7 @@ No cross-project contamination. No global memory leaks.
 
 ---
 
-### 🧠 Persistent Memory (RAG-Powered)
+### 🧠 **Persistent Memory (RAG-Powered)**
 
 Memory is not magic — it’s **explicit and inspectable**.
 
@@ -78,20 +78,18 @@ Retrieval:
 
 ---
 
-### 📄 Artifact Intelligence
+### 📄 **Artifact Intelligence**
 
 Artifacts are not just displayed — they are **understood**.
 
 * Automatic artifact detection
-* Artifact lifecycle:
-
-  * Detect → Create → Update → Persist
+* Artifact lifecycle: ```Detect → Create → Update → Persist```
 * Artifacts feed memory and future reasoning
 * Workspace-aware artifact management
 
 ---
 
-### 🔌 Multi-Model LLM Support
+### 🔌 **Multi-Model LLM Support**
 
 Model-agnostic by design.
 
@@ -105,7 +103,7 @@ Switch models per workspace or task — no lock-in.
 
 ---
 
-### 📊 Observability (Planned)
+### 📊 **Observability (Planned)**
 
 Designed for engineers who care about internals:
 
@@ -116,24 +114,24 @@ Designed for engineers who care about internals:
 
 ---
 
-## 🆚 What This Has That Claude Workspaces Don’t
+## 🆚 **What This Has That Claude Workspaces Don’t**
 
-| Capability          | Claude | AI Co-Workspace |
-| ------------------- | ------ | --------------- |
-| Editable memory     | ❌      | ✅               |
-| Transparent RAG     | ❌      | ✅               |
-| Artifact lifecycle  | ❌      | ✅               |
-| Multi-model support | ❌      | ✅               |
-| Local LLMs          | ❌      | ✅               |
-| Workspace export    | ❌      | ✅               |
-| Extensible APIs     | ❌      | ✅               |
+| Capability             | Claude | AI Co-Workspace |
+| ---------------------- | ------ | --------------- |
+| Editable memory        | ❌     | ✅             |
+| Transparent RAG        | ❌     | ✅             |
+| Artifact lifecycle     | ❌     | ✅             |
+| Multi-model support    | ❌     | ✅             |
+| Local LLMs             | ❌     | ✅             |
+| Workspace export       | ❌     | ✅             |
+| Extensible APIs        | ❌     | ✅             |
 
 > Claude is a closed product.
 > AI Co-Workspace is an **open platform**.
 
 ---
 
-## 🏗️ Architecture Flow
+## 🏗️ **Architecture Flow**
 
 ```
 User Prompt
@@ -155,61 +153,143 @@ Memory Update
 
 ---
 
-## 📁 Repository Structure
+## 📁 **Repository Structure**
 
 ```
 ai-co-workspace/
-├── backend/            # FastAPI backend
+├── README.md
+├── LICENSE
+├── .gitignore
+├── .env.example
+├── docker-compose.yml
+├── Makefile
+├── docs/
+│   ├── architecture.md
+│   ├── mvp-execution-flow.md
+│   ├── memory-system.md
+│   ├── rag-design.md              # 🆕 RAG explained clearly
+│   ├── artifact-lifecycle.md
+│   ├── api-contracts.md
+│   └── screenshots/
+├── backend/
 │   ├── app/
-│   │   ├── api/        # REST APIs
-│   │   ├── services/   # LLM, memory, RAG, artifacts
-│   │   ├── db/         # SQLAlchemy models
-│   │   └── core/       # Config, security, lifecycle
-│   └── tests/
-│
-├── frontend/           # Next.js workspace UI
-│
-├── vectorstore/        # Chroma / Qdrant persistence
-│
-├── infra/              # Docker, Kubernetes, Terraform
-│
-├── docs/               # Architecture & design docs
-│
-└── scripts/            # Dev utilities & migrations
+│   │   ├── main.py
+│   │   ├── core/
+│   │   │   ├── config.py
+│   │   │   ├── logging.py
+│   │   │   ├── security.py
+│   │   │   └── lifespan.py
+│   │   ├── db/
+│   │   │   ├── base.py
+│   │   │   ├── session.py
+│   │   │   └── models/
+│   │   │       ├── workspace.py
+│   │   │       ├── chat.py
+│   │   │       ├── message.py
+│   │   │       ├── artifact.py
+│   │   │       └── memory.py
+│   │   ├── schemas/
+│   │   │   ├── workspace.py
+│   │   │   ├── chat.py
+│   │   │   ├── message.py
+│   │   │   ├── artifact.py
+│   │   │   └── memory.py
+│   │   ├── api/
+│   │   │   ├── deps.py
+│   │   │   └── v1/
+│   │   │       ├── workspaces.py
+│   │   │       ├── chats.py
+│   │   │       ├── messages.py
+│   │   │       ├── artifacts.py
+│   │   │       ├── files.py
+│   │   │       ├── rag.py            # 🆕 RAG query endpoint
+│   │   │       └── health.py
+│   │   ├── services/
+│   │   │   ├── llm/                  # PHASE 2
+│   │   │   │   ├── base.py
+│   │   │   │   ├── ollama.py
+│   │   │   │   ├── openai.py
+│   │   │   │   └── model_registry.py
+│   │   │   ├── prompt/               # PHASE 3
+│   │   │   │   ├── builder.py
+│   │   │   │   ├── context.py
+│   │   │   │   └── system_rules.py
+│   │   │   ├── memory/               # MEMORY LAYER
+│   │   │   │   ├── summarizer.py      # chat → summary
+│   │   │   │   ├── retriever.py       # lightweight recall
+│   │   │   │   ├── semantic_retriever.py  # 🆕 RAG core
+│   │   │   │   └── memory_manager.py
+│   │   │   ├── artifacts/            # PHASE 4
+│   │   │   │   ├── detector.py
+│   │   │   │   ├── creator.py
+│   │   │   │   ├── updater.py
+│   │   │   │   └── artifact_service.py
+│   │   │   ├── vector/               # 🆕 RAG INFRA
+│   │   │   │   ├── embeddings.py     # text → vector
+│   │   │   │   ├── chroma_store.py
+│   │   │   │   ├── qdrant_store.py
+│   │   │   │   └── vector_router.py
+│   │   │   └── workspaces/
+│   │   │       ├── context_builder.py
+│   │   │       └── permissions.py
+│   │   ├── tasks/
+│   │   │   ├── summarization.py
+│   │   │   ├── embedding.py           # 🆕 background embedding
+│   │   │   └── memory_cleanup.py
+│   │   └── utils/
+│   │       ├── token_counter.py
+│   │       ├── text.py
+│   │       └── time.py
+│   ├── tests/
+│   │   ├── test_workspaces.py
+│   │   ├── test_chats.py
+│   │   ├── test_artifacts.py
+│   │   ├── test_memory.py
+│   │   └── test_rag.py                # 🆕 RAG tests
+│   └── requirements.txt
+├── frontend/
+│   └── (unchanged – RAG is backend-transparent)
+├── vectorstore/
+│   ├── chroma/
+│   └── qdrant/
+├── infra/
+│   └── (docker / k8s / terraform)
+└── scripts/
+    ├── seed_workspace.py
+    ├── migrate_db.py
+    └── dev.sh
 ```
-
-See `/docs` for deep dives into architecture, memory systems, and artifact lifecycle.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ **Tech Stack**
 
-### Backend
+### **Backend**
 
 * FastAPI
 * SQLAlchemy
 * Async service architecture
 * Modular domain design
 
-### LLMs
+### **LLMs**
 
 * Ollama (local-first)
 * OpenAI
 * Model registry abstraction
 
-### Memory & RAG
+### **Memory & RAG**
 
 * Chroma / Qdrant
 * Embedding abstraction
 * Semantic + keyword retrieval
 
-### Frontend
+### **Frontend**
 
 * Next.js
 * TailwindCSS
 * Workspace-centric UI
 
-### Infrastructure
+### **Infrastructure**
 
 * Docker & Docker Compose
 * Kubernetes manifests
@@ -217,7 +297,7 @@ See `/docs` for deep dives into architecture, memory systems, and artifact lifec
 
 ---
 
-## 🧪 What This Project Is NOT
+## 🧪 **What This Project Is NOT**
 
 * ❌ Not an LLM training platform
 * ❌ Not a fine-tuning pipeline
@@ -228,7 +308,7 @@ This project focuses on **LLM orchestration, memory systems, and workspace intel
 
 ---
 
-## 🗺️ MVP Execution Phases
+## 🗺️ **MVP Execution Phases**
 
 1️⃣ Backend workspace & chat APIs
 2️⃣ Ollama LLM integration
@@ -240,7 +320,7 @@ This project focuses on **LLM orchestration, memory systems, and workspace intel
 
 ---
 
-## 📦 Data Ownership & Portability
+## 📦 **Data Ownership & Portability**
 
 * Workspace export (JSON / Markdown)
 * Local-first execution
@@ -249,7 +329,7 @@ This project focuses on **LLM orchestration, memory systems, and workspace intel
 
 ---
 
-## 🤝 Who This Is For
+## 🤝 **Who This Is For**
 
 * Cloud & DevOps engineers
 * AI platform builders
@@ -259,13 +339,13 @@ This project focuses on **LLM orchestration, memory systems, and workspace intel
 
 ---
 
-## 📜 License
+## 📜 **License**
 
 MIT License — build freely, fork openly, ship boldly.
 
 ---
 
-## 🧭 Roadmap Highlights
+## 🧭 **Roadmap Highlights**
 
 * Memory pinning & importance scoring
 * Artifact versioning & diffs
@@ -275,7 +355,7 @@ MIT License — build freely, fork openly, ship boldly.
 
 ---
 
-## ⭐ Final Note
+## ⭐ **Final Note**
 
 This project isn’t about replacing Claude.
 
