@@ -1,23 +1,15 @@
-from fastapi import APIRouter
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from typing import List
+from app.services.vector.vector_router import query_vectors
+from app.db.models.memory import Memory
+from app.api.deps import get_db
 
 router = APIRouter()
 
-class RAGRequest(BaseModel):
-    workspace_id: int
-    query: str
-
-class RAGResponse(BaseModel):
-    context: str
-    answer: str
-
-def retrieve_context(workspace_id: int, query: str):
-    # Simulate semantic retrieval / RAG
-    return f"Retrieved context for workspace {workspace_id} and query '{query}'"
-
-@router.post("/", response_model=RAGResponse)
-def rag_query(req: RAGRequest):
-    context = retrieve_context(req.workspace_id, req.query)
-    # LLM simulation
-    answer = f"Simulated answer for: {req.query}"
-    return RAGResponse(context=context, answer=answer)
+@router.get("/query")
+def query_rag(query: str, db: Session = Depends(get_db)):
+    # Fetch top vector matches
+    results = query_vectors(query)
+    # Optionally store in memory
+    return {"query": query, "results": results}
