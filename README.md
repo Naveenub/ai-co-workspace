@@ -260,7 +260,7 @@ ai-co-workspace/
 │   │   │   ├── MarkdownViewer.tsx
 │   │   │   └── MessageBubble.tsx
 │   │   └── styles/
-│   │   │   └── globals.css
+│   │       └── globals.css
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── tailwind.config.js
@@ -268,25 +268,28 @@ ai-co-workspace/
 │   ├── chroma/
 │   │   ├── __init__.py
 │   │   └── client.py        # pickle-based local store for testing
-│   ├── qdrant/
-│   │   ├── __init__.py
-│   │   └── client.py        # placeholder for live Qdrant integration
-├── infra/
-│   ├── docker/
-│   │   ├── backend.Dockerfile
-│   │   ├── frontend.Dockerfile
-│   │   └── ollama.Dockerfile       # if using Ollama LLM
-│   ├── kubernetes/
-│   │   ├── backend.yaml
-│   │   ├── frontend.yaml
-│   │   └── qdrant.yaml
-│   └── terraform/
+│   └── qdrant/
+│       ├── __init__.py
+│       └── client.py        # placeholder for live Qdrant integration
+infra/
+├── docker/
+│   ├── backend.Dockerfile
+│   ├── frontend.Dockerfile
+│   └── ollama.Dockerfile
+├── kubernetes/
+│   ├── backend.yaml
+│   ├── frontend.yaml
+│   └── qdrant.yaml
+└── terraform/
 │       ├── aws/
-│       │   └── main.tf             # AWS resources (ECS, S3, RDS)
+│       │   ├── main.tf
+│       │   ├── variables.tf
+│       │   ├── outputs.tf
+│       │   └── provider.tf
 │       └── modules/
 │           ├── network.tf
-|           ├── db.tf
-|           └── storage.tf
+│           ├── db.tf
+│           └── storage.tf
 └── scripts/
     ├── seed_workspace.py
     ├── migrate_db.py
