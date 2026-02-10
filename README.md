@@ -271,16 +271,16 @@ ai-co-workspace/
 │   └── qdrant/
 │       ├── __init__.py
 │       └── client.py        # placeholder for live Qdrant integration
-infra/
-├── docker/
-│   ├── backend.Dockerfile
-│   ├── frontend.Dockerfile
-│   └── ollama.Dockerfile
-├── kubernetes/
-│   ├── backend.yaml
-│   ├── frontend.yaml
-│   └── qdrant.yaml
-└── terraform/
+├── infra/
+│   ├── docker/
+│   │   ├── backend.Dockerfile
+│   │   ├── frontend.Dockerfile
+│   │   └── ollama.Dockerfile
+│   ├── kubernetes/
+│   │   ├── backend.yaml
+│   │   ├── frontend.yaml
+│   │   └── qdrant.yaml
+│   └── terraform/
 │       ├── aws/
 │       │   ├── main.tf
 │       │   ├── variables.tf
